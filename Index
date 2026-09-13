@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ActivaMente - MOOC</title>
+<style>
+/* ================= RESET Y BASE ================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(145deg, #f0f5fa 0%, #fafcff 100%);
+    color: #1e2b36;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= HEADER ================= */
+header {
+    height: 72px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(25, 118, 210, 0.12);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    gap: 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1565c0;
+    letter-spacing: -0.5px;
+    transition: transform 0.2s;
+}
+
+.logo:hover {
+    transform: scale(1.02);
+}
+
+.logo b {
+    color: #e91e63;
+    font-weight: 800;
+}
+
+nav {
+    color: #4a5b6a;
+    font-size: 14px;
+    display: flex;
+    gap: 28px;
+    font-weight: 500;
+}
+
+nav span {
+    cursor: default;
+    transition: color 0.2s;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+}
+
+nav span:hover {
+    color: #1565c0;
+    border-bottom-color: #1565c0;
+}
+
+.avatar {
+    margin-left: auto;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 50%;
+    padding: 10px 14px;
+    font-weight: 700;
+    color: #1565c0;
+    font-size: 15px;
+    box-shadow: 0 2px 10px rgba(25, 118, 210, 0.15);
+    border: 2px solid white;
+    transition: transform 0.2s;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+/* ================= CONTENEDOR ================= */
+.container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 24px;
+    flex: 1;
+    width: 100%;
+}
+
+/* ================= HERO ================= */
+.hero {
+    min-height: 240px;
+    border-radius: 28px;
+    padding: 40px 44px;
+    background: linear-gradient(135deg, #e1f5fe 0%, #f3e5f5 50%, #fce4ec 100%);
+    display: flex;
+    align-items: center;
+    box-shadow: 0 20px 40px -12px rgba(25, 118, 210, 0.15);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.6) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.hero:hover {
+    box-shadow: 0 24px 48px -12px rgba(25, 118, 210, 0.25);
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin: 0 0 12px;
+    color: #0d47a1;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    position: relative;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #37474f;
+    position: relative;
+    max-width: 600px;
+}
+
+.hero-art {
+    margin-left: auto;
+    font-size: 88px;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ================= BIENVENIDA ================= */
+.welcome {
+    margin-top: 28px;
+    padding: 28px 30px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    box-shadow: 0 8px 24px rgba(56, 142, 60, 0.08);
+    border: 1px solid rgba(56, 142, 60, 0.1);
+    transition: transform 0.2s;
+}
+
+.welcome:hover {
+    transform: translateY(-2px);
+}
+
+.welcome .big {
+    font-size: 52px;
+    line-height: 1;
+}
+
+.welcome h2 {
+    margin-top: 0;
+    color: #1b5e20;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.welcome p {
+    line-height: 1.7;
+    color: #2e3b32;
+}
+
+/* ================= TARJETAS ================= */
+.card {
+    background: white;
+    border: 1px solid rgba(25, 118, 210, 0.08);
+    border-radius: 24px;
+    padding: 28px 30px;
+    margin-top: 28px;
+    box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s, transform 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 14px 40px -8px rgba(0, 0, 0, 0.1);
+}
+
+/* ================= MATRICULA ================= */
+.enroll {
+    border: 2px solid rgba(129, 199, 132, 0.4);
+    background: linear-gradient(135deg, #ffffff, #fafffa);
+}
+
+.enroll h2 {
+    margin-top: 0;
+    color: #1b5e20;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.enroll p {
+    color: #4a5b6a;
+    margin-bottom: 18px;
+}
+
+.row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+input {
+    padding: 15px 18px;
+    border: 2px solid #e0e7ef;
+    border-radius: 14px;
+    font-size: 15px;
+    flex: 1;
+    min-width: 200px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fafcfe;
+    font-family: inherit;
+    outline: none;
+}
+
+input:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.1);
+    background: white;
+}
+
+input:disabled {
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+button {
+    border: 0;
+    border-radius: 14px;
+    padding: 15px 26px;
+    background: linear-gradient(135deg, #1976d2, #1565c0);
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+    box-shadow: 0 6px 16px -4px rgba(25, 118, 210, 0.35);
+    font-family: inherit;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -6px rgba(25, 118, 210, 0.45);
+    opacity: 0.95;
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button.gray {
+    background: linear-gradient(135deg, #eef2f7, #e3eaf2);
+    color: #245b89;
+    box-shadow: 0 4px 12px -4px rgba(36, 91, 137, 0.15);
+}
+
+button.gray:hover {
+    box-shadow: 0 8px 20px -6px rgba(36, 91, 137, 0.25);
+    background: linear-gradient(135deg, #e3eaf2, #d8e2ee);
+}
+
+.message {
+    margin-top: 16px;
+    font-weight: 700;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 15px;
+}
+
+.ok {
+    color: #2e7d32;
+    background: #e8f5e9;
+    border-left: 4px solid #43a047;
+}
+
+.error {
+    color: #c62828;
+    background: #ffebee;
+    border-left: 4px solid #e53935;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ================= MODULOS ================= */
+.modules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 28px;
+}
+
+.module {
+    background: white;
+    border: 1px solid rgba(25, 118, 210, 0.08);
+    border-radius: 24px;
+    padding: 26px 28px;
+    transition: transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.05);
+}
+
+.module:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px -12px rgba(25, 118, 210, 0.15);
+}
+
+.badge {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    color: #1b5e20;
+    background: #e8f5e9;
+    padding: 7px 14px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.module h3 {
+    margin: 16px 0 10px;
+    font-size: 19px;
+    color: #0d47a1;
+    font-weight: 700;
+}
+
+.module p {
+    line-height: 1.7;
+    color: #4a5b6a;
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+
+/* ================= PROGRESO ================= */
+.progress {
+    height: 10px;
+    background: #eef2f7;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 18px 0;
+}
+
+.bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #66bb6a, #43a047);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+}
+
+/* ================= LECCIONES ================= */
+#lessonArea {
+    background: white;
+    border-radius: 24px;
+    border: 1px solid rgba(25, 118, 210, 0.08);
+    padding: 30px 32px;
+    margin-top: 28px;
+    box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.06);
+}
+
+#lessonArea h2 {
+    color: #0d47a1;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.lesson {
+    padding: 16px 18px;
+    background: linear-gradient(135deg, #f8fbfe, #f1f6fa);
+    border-radius: 14px;
+    margin: 12px 0;
+    border: 1px solid rgba(25, 118, 210, 0.06);
+    transition: background 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.lesson:hover {
+    background: linear-gradient(135deg, #f1f7fd, #e8f2fa);
+    border-color: rgba(25, 118, 210, 0.15);
+}
+
+.lesson label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 500;
+    color: #2e3b4a;
+}
+
+.lesson input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    accent-color: #43a047;
+    cursor: pointer;
+    border-radius: 6px;
+    flex: none;
+}
+
+/* ================= INFORMACION ================= */
+.side {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.mini {
+    background: white;
+    border-radius: 20px;
+    padding: 26px 20px;
+    text-align: center;
+    border: 1px solid rgba(25, 118, 210, 0.08);
+    box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.05);
+    font-size: 15px;
+    color: #4a5b6a;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.mini:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px -10px rgba(25, 118, 210, 0.12);
+}
+
+.mini strong {
+    font-size: 28px;
+    color: #1565c0;
+    display: block;
+    margin: 8px 0 4px;
+    font-weight: 800;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    text-align: center;
+    color: #64748b;
+    padding: 40px 24px 32px;
+    font-size: 14px;
+    line-height: 1.9;
+    margin-top: auto;
+    border-top: 1px solid rgba(25, 118, 210, 0.06);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+}
+
+footer b {
+    color: #1565c0;
+    font-weight: 700;
+}
+
+.dev-credits {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 24px;
+    font-size: 14px;
+    color: #475569;
+}
+
+.dev-credits span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    padding: 6px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(25, 118, 210, 0.08);
+    transition: background 0.2s, transform 0.2s;
+}
+
+.dev-credits span:hover {
+    background: #e8f0fe;
+    transform: translateY(-2px);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 850px) {
+    .modules,
+    .side {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 750px) {
+    header {
+        padding: 0 18px;
+        gap: 16px;
+        height: 64px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .container {
+        padding: 16px 14px;
+    }
+
+    .hero {
+        padding: 28px 24px;
+        min-height: 180px;
+        border-radius: 22px;
+    }
+
+    .hero-art {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .welcome {
+        padding: 22px 20px;
+        border-radius: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .welcome .big {
+        font-size: 42px;
+    }
+
+    .card {
+        padding: 22px 20px;
+        border-radius: 20px;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    input {
+        min-width: 100%;
+    }
+
+    button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .module {
+        padding: 22px 20px;
+        border-radius: 20px;
+    }
+
+    #lessonArea {
+        padding: 22px 18px;
+        border-radius: 20px;
+    }
+
+    .lesson {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .side {
+        gap: 16px;
+    }
+
+    .mini {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+
+    .dev-credits {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .dev-credits span {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .avatar {
+        padding: 8px 11px;
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- =====================================================
+     ENCABEZADO
+===================================================== -->
+<header>
+    <div class="logo">Activa<b>Mente</b></div>
+    <nav>
+        <span>Área personal</span>
+        <span>Mis cursos</span>
+        <span>Mi progreso</span>
+    </nav>
+    <div class="avatar">AU</div>
+</header>
+
+<div class="container">
+
+    <!-- =====================================================
+         PORTADA
+    ===================================================== -->
+    <section class="hero">
+        <div>
+            <h1>¡Bienvenidos a ActivaMente!</h1>
+            <p>
+                <b>Pausas activas para aprender mejor.</b><br>
+                Muévete, respira, activa tu mente y continúa aprendiendo.
+            </p>
+        </div>
+        <div class="hero-art">🧠🏃‍♀️</div>
+    </section>
+
+    <!-- =====================================================
+         BIENVENIDA
+    ===================================================== -->
+    <section class="welcome">
+        <div class="big">🌿</div>
+        <div>
+            <h2>¡Bienvenido(a) a ActivaMente!</h2>
+            <p>
+                Te invitamos a descubrir el poder de las <b>pausas activas</b>.
+                En este MOOC encontrarás actividades sencillas para moverte,
+                respirar, concentrarte y sentirte mejor cada día.
+            </p>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         MATRICULA
+    ===================================================== -->
+    <section class="card enroll">
+        <h2>📝 Matrícula al MOOC</h2>
+        <p>
+            Para comenzar, registra tus datos. La matrícula se guardará
+            automáticamente en este navegador.
+        </p>
+
+        <div id="formMatricula">
+            <div class="row">
+                <input id="name" type="text" placeholder="Nombre completo">
+                <input id="email" type="email" placeholder="Correo electrónico">
+            </div>
+            <br>
+            <div class="row">
+                <input value="ActivaMente - Pausas activas para aprender mejor" disabled>
+                <button onclick="matricular()">🎓 Matricularme</button>
+            </div>
+        </div>
+
+        <!-- Información cuando ya está matriculado -->
+        <div id="matriculaActiva" class="hidden"></div>
+        <div id="mensaje" class="message"></div>
+    </section>
+
+    <!-- =====================================================
+         CONTENIDO DEL CURSO
+    ===================================================== -->
+    <section id="contenidoCurso" class="hidden">
+        <h2 style="color:#0d47a1; margin-top:32px; font-weight:800;">🚀 Empieza tu recorrido</h2>
+
+        <!-- ================= MODULOS ================= -->
+        <div class="modules">
+            <!-- MODULO 1 -->
+            <article class="module">
+                <span class="badge">MÓDULO 1</span>
+                <h3>🌱 Muévete y activa tu cuerpo</h3>
+                <p>
+                    Conoce las pausas activas y realiza ejercicios sencillos
+                    para activar el cuerpo durante la jornada.
+                </p>
+                <div class="progress">
+                    <div id="bar1" class="bar"></div>
+                </div>
+                <button onclick="iniciarModulo(1)">▶ Iniciar módulo</button>
+            </article>
+
+            <!-- MODULO 2 -->
+            <article class="module">
+                <span class="badge">MÓDULO 2</span>
+                <h3>🧘 Respira y concentra tu mente</h3>
+                <p>
+                    Aprende técnicas breves de respiración, concentración
+                    y bienestar.
+                </p>
+                <div class="progress">
+                    <div id="bar2" class="bar"></div>
+                </div>
+                <button onclick="iniciarModulo(2)">▶ Iniciar módulo</button>
+            </article>
+        </div>
+
+        <!-- =================================================
+             AREA DE LECCIONES
+        ================================================= -->
+        <div id="lessonArea">
+            <h2>👋 Aún no has iniciado un módulo</h2>
+            <p>Cuando estés matriculado, selecciona <b>Iniciar módulo</b>.</p>
+        </div>
+
+        <!-- =================================================
+             INFORMACION DEL ESTUDIANTE
+        ================================================= -->
+        <div class="side">
+            <div class="mini">
+                👤
+                <br>
+                <strong id="student">—</strong>
+                <br>
+                Estudiante
+            </div>
+            <div class="mini">
+                📊
+                <br>
+                <strong id="totalProgress">0%</strong>
+                <br>
+                Progreso
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div>
+        <b>ActivaMente</b> · MOOC educativo
+    </div>
+    <div style="margin-top:4px; font-size:13px; color:#94a3b8;">
+        Matrícula y progreso almacenados con localStorage
+    </div>
+    <div class="dev-credits">
+        <span>👩‍💻 Desarrollado por:</span>
+        <span>Paola Ballesteros</span>
+        <span>Angie Chaparro</span>
+        <span>Margarita Hernández</span>
+    </div>
+</footer>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+<script>
+/*
+===========================================================
+   CONFIGURACIÓN
+===========================================================
+*/
+const STORAGE_KEY = "activamente_mooc_matricula";
+
+/*
+===========================================================
+   INFORMACIÓN DE LOS MÓDULOS
+===========================================================
+*/
+const MODULOS = {
+    1: {
+        titulo: "🌱 Módulo 1: Muévete y activa tu cuerpo",
+        lecciones: [
+            "¿Qué son las pausas activas?",
+            "Beneficios de moverse durante la jornada",
+            "Actividad: estiramiento de 3 minutos",
+            "Reto: crea tu propia pausa activa"
+        ]
+    },
+    2: {
+        titulo: "🧘 Módulo 2: Respira y concentra tu mente",
+        lecciones: [
+            "Respiración consciente",
+            "Concentración y atención",
+            "Actividad: respiración de 60 segundos",
+            "Reto: pausa activa para aprender mejor"
+        ]
+    }
+};
+
+/*
+===========================================================
+   OBTENER MATRÍCULA
+===========================================================
+*/
+function obtenerDatos() {
+    const datos = localStorage.getItem(STORAGE_KEY);
+    if (!datos) return null;
+    return JSON.parse(datos);
+}
+
+/*
+===========================================================
+   GUARDAR DATOS
+===========================================================
+*/
+function guardarDatos(datos) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(datos));
+}
+
+/*
+===========================================================
+   MATRICULAR ESTUDIANTE
+===========================================================
+*/
+function matricular() {
+    const nombre = document.getElementById("name").value.trim();
+    const correo = document.getElementById("email").value.trim();
+
+    /* Validar nombre */
+    if (nombre.length < 3) {
+        mostrarMensaje("❌ Escribe el nombre completo.", "error");
+        return;
+    }
+
+    /* Validar correo */
+    const correoValido = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!correoValido.test(correo)) {
+        mostrarMensaje("❌ Escribe un correo electrónico válido.", "error");
+        return;
+    }
+
+    /* Crear registro del estudiante */
+    const datos = {
+        nombre: nombre,
+        correo: correo,
+        fecha: new Date().toLocaleString("es-CO"),
+        modulosIniciados: {},
+        leccionesCompletadas: {},
+        modulosFinalizados: {}
+    };
+
+    /* Guardar en localStorage */
+    guardarDatos(datos);
+
+    /* Mostrar interfaz del estudiante */
+    mostrarCurso();
+
+    mostrarMensaje("✅ Matrícula realizada correctamente. ¡Bienvenido(a)!", "ok");
+}
+
+/*
+===========================================================
+   MOSTRAR CURSO DESPUÉS DE MATRICULAR
+===========================================================
+*/
+function mostrarCurso() {
+    const datos = obtenerDatos();
+    if (!datos) return;
+
+    /* Bloquear campos */
+    document.getElementById("name").disabled = true;
+    document.getElementById("email").disabled = true;
+
+    /* Ocultar formulario */
+    document.getElementById("formMatricula").classList.add("hidden");
+
+    /* Mostrar matrícula activa */
+    const matricula = document.getElementById("matriculaActiva");
+    matricula.classList.remove("hidden");
+
+    matricula.innerHTML = `
+        <p>🎓 <b>Matrícula activa</b></p>
+        <p>
+            Estudiante: <b>${escapar(datos.nombre)}</b><br>
+            Correo: ${escapar(datos.correo)}<br>
+            Fecha de matrícula: ${escapar(datos.fecha)}
+        </p>
+        <button class="gray" onclick="cambiarEstudiante()">🔄 Cambiar estudiante</button>
+    `;
+
+    /* Mostrar contenido del MOOC */
+    document.getElementById("contenidoCurso").classList.remove("hidden");
+
+    /* Mostrar nombre */
+    document.getElementById("student").textContent = datos.nombre.split(" ")[0];
+
+    actualizarProgreso();
+}
+
+/*
+===========================================================
+   INICIAR MÓDULO
+===========================================================
+*/
+function iniciarModulo(id) {
+    const datos = obtenerDatos();
+
+    /* Si no está matriculado */
+    if (!datos) {
+        alert("Primero debes realizar la matrícula.");
+        return;
+    }
+
+    /* Registrar inicio */
+    if (!datos.modulosIniciados[id]) {
+        datos.modulosIniciados[id] = new Date().toISOString();
+    }
+
+    guardarDatos(datos);
+
+    const modulo = MODULOS[id];
+
+    /* Construir lecciones */
+    let html = `
+        <h2>${modulo.titulo}</h2>
+        <p>👋 <b>${escapar(datos.nombre)}</b>, ya puedes comenzar el módulo.</p>
+    `;
+
+    modulo.lecciones.forEach((leccion, indice) => {
+        const clave = id + "-" + indice;
+        const marcada = datos.leccionesCompletadas[clave] === true;
+
+        html += `
+            <div class="lesson">
+                <label>
+                    <input
+                        type="checkbox"
+                        data-modulo="${id}"
+                        data-leccion="${indice}"
+                        ${marcada ? "checked" : ""}
+                        onchange="completarLeccion(${id}, ${indice}, this.checked)"
+                    >
+                    ${leccion}
+                </label>
+            </div>
+        `;
+    });
+
+    html += `
+        <br>
+        <button onclick="finalizarModulo(${id})">✅ Finalizar módulo</button>
+    `;
+
+    document.getElementById("lessonArea").innerHTML = html;
+
+    /* Llevar al área del módulo */
+    document.getElementById("lessonArea").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+    actualizarProgreso();
+}
+
+/*
+===========================================================
+   COMPLETAR LECCIÓN
+===========================================================
+*/
+function completarLeccion(modulo, leccion, completada) {
+    const datos = obtenerDatos();
+    if (!datos) return;
+
+    const clave = modulo + "-" + leccion;
+    datos.leccionesCompletadas[clave] = completada;
+
+    guardarDatos(datos);
+    actualizarProgreso();
+}
+
+/*
+===========================================================
+   FINALIZAR MÓDULO
+===========================================================
+*/
+function finalizarModulo(id) {
+    const datos = obtenerDatos();
+    if (!datos) return;
+
+    datos.modulosFinalizados[id] = true;
+    guardarDatos(datos);
+    actualizarProgreso();
+
+    alert("🎉 ¡Excelente! Has finalizado el módulo.");
+}
+
+/*
+===========================================================
+   ACTUALIZAR PROGRESO
+===========================================================
+*/
+function actualizarProgreso() {
+    const datos = obtenerDatos();
+    if (!datos) return;
+
+    let totalCompletado = 0;
+    const totalLecciones = 8;
+
+    /* Actualizar cada módulo */
+    [1, 2].forEach(id => {
+        const modulo = MODULOS[id];
+        let completadas = 0;
+
+        modulo.lecciones.forEach((_, indice) => {
+            const clave = id + "-" + indice;
+            if (datos.leccionesCompletadas[clave] === true) {
+                completadas++;
+            }
+        });
+
+        /* Si terminó el módulo, marcar 100% */
+        if (datos.modulosFinalizados[id]) {
+            completadas = modulo.lecciones.length;
+        }
+
+        totalCompletado += completadas;
+
+        const porcentaje = (completadas / modulo.lecciones.length) * 100;
+        document.getElementById("bar" + id).style.width = porcentaje + "%";
+    });
+
+    /* Progreso general */
+    const progresoGeneral = Math.round((totalCompletado / totalLecciones) * 100);
+    document.getElementById("totalProgress").textContent = progresoGeneral + "%";
+}
+
+/*
+===========================================================
+   CAMBIAR ESTUDIANTE
+===========================================================
+*/
+function cambiarEstudiante() {
+    const confirmar = confirm("¿Quieres borrar la matrícula y el progreso de este navegador?");
+    if (confirmar) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+    }
+}
+
+/*
+===========================================================
+   MENSAJES
+===========================================================
+*/
+function mostrarMensaje(texto, tipo) {
+    const elemento = document.getElementById("mensaje");
+    elemento.textContent = texto;
+    elemento.className = "message " + tipo;
+}
+
+/*
+===========================================================
+   SEGURIDAD BÁSICA PARA MOSTRAR EL NOMBRE
+===========================================================
+*/
+function escapar(texto) {
+    return String(texto).replace(/[&<>"']/g, function(caracter) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        }[caracter];
+    });
+}
+
+/*
+===========================================================
+   CARGAR AUTOMÁTICAMENTE LA MATRÍCULA SI YA EXISTE
+===========================================================
+*/
+window.addEventListener("DOMContentLoaded", function() {
+    const datos = obtenerDatos();
+    if (datos) {
+        mostrarCurso();
+    }
+});
+</script>
+
+</body>
+</html>
